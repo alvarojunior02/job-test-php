@@ -1,0 +1,15 @@
+{
+    "name": "alvaro/job-test-php",
+    "autoload": {
+        "psr-4": {
+            "app\\": "app"
+        }
+    },
+    "authors": [
+        {
+            "name": "Alvaro Junior",
+            "email": "alvaroamcjunior8@gmail.com"
+        }
+    ],
+    "require": {}
+}
