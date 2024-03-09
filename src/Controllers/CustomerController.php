@@ -10,7 +10,6 @@ class CustomerController extends Controller
 {
   public function index()
   {
-    Customer::class
     $this->render('customer/index');
   }
 
