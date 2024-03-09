@@ -1,0 +1,130 @@
+header {
+  width: 100vw;
+  height: 80px;
+  background-color: #166534;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#header-content {
+  max-width: 640px;
+  width: 100vw;
+  height: 80px;
+  background-color: transparent;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#header-logo {
+  width: 50%;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+#header-logo-card {
+  width: min-content;
+  padding: 5px 10px;
+  background-color: #FFFFFF;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+#header-logo-card p {
+  width: 50%;
+  margin-left: 15px;
+
+  font-weight: 700;
+  font-size: 20px;
+  color: #000000;
+
+  text-align: left;
+}
+
+#header-links {
+  width: 50%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+#header-links a {
+  color: #FFFFFF;
+  font-size: 16px;
+  font-weight: 500;
+
+  text-decoration: none;
+}
+
+#header-links a:hover {
+  text-decoration: underline;
+}
+
+main {
+  max-width: 640px;
+  width: 100vw;
+
+  padding-top: 20px;
+}
+
+#main-title {
+  font-size: 32px;
+}
+
+#form-import-customers {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+#form-import-customers label {
+  text-align: left;
+}
+
+#form-import-customers label:hover {
+  cursor: pointer;
+}
+
+#form-import-customers label input[type="file"] {
+  /* display: none; */
+}
+
+#form-import-customers button {
+  width: 200px;
+  padding: 10px;
+
+  border: none;
+  background-color: #166534;
+  color: #FFFFFF;
+
+  transition: 0.5s;
+
+  font-size: 16px;
+}
+
+#form-import-customers button:hover {
+  cursor: pointer;
+  background-color: #166534c5;
+}
+
+#customers-list {
+  margin-top: 40px;
+
+  border: 1px solid #166534;
+  width: 100%;
+}
+
+#customers-list thead {
+  border: 1px solid #166534;
+}

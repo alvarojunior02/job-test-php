@@ -1,0 +1,47 @@
+.title {
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 38px;
+  text-align: center;
+
+  margin-bottom: 10px;
+}
+
+#home-buttons {
+  margin-top: 10px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#home-buttons a {
+  text-decoration: none;
+  font-weight: 600;
+
+  color: #000000;
+  background-color: #FFFFFF;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 160px;
+  height: 160px;
+  margin: 10px;
+  padding: 10px;
+}
+
+#home-buttons a:hover {
+  background-color: #ffffffde;
+}
+
+#home-buttons a img {
+  margin-bottom: 5px;
+}
+
+#home-buttons a span {
+  margin-top: 5px;
+  font-size: 20px;
+}
