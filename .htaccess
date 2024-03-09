@@ -1,12 +1,2 @@
-# Ativação para gerenciar rotas da aplicação
 RewriteEngine On
-
-# DRota principal do sistema
-RewriteBase /
-
-# Regra para redirecionar caso a rota não exista
-RewriteCond %{REQUEST_FILENAME} !-d       
-RewriteCond %{REQUEST_FILENAME} !-f
-
-# Redirecionar as requests para o index.php
-RewriteRule ^(.+)$ index.php [QSA,L]
+RewriteRule (.*) public/$1
