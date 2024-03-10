@@ -42,7 +42,7 @@ class Router
         $controller = new $controller();
         $controller->$action();
       } else {
-        throw new \Exception("Rota não encontrada");
+        include "Views/404.php";
       }
     } catch (Exception $e) {
       echo $e->getMessage();
