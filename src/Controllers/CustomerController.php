@@ -10,7 +10,12 @@ class CustomerController extends Controller
 {
   public function index()
   {
-    $this->render('customer/index');
+    $customers = Customer::findAll();
+    $data = [
+      'customers' => $customers
+    ];
+
+    $this->render(view: 'customer/index', data: $data);
   }
 
   public function importCsv()
@@ -28,12 +33,28 @@ class CustomerController extends Controller
 
       $file_data = fopen($file['tmp_name'], "r");
 
+
+      $firstLine = true;
+      $rows_imported = 0;
+      $rows = 0;
       while ($line = fgetcsv($file_data, 1000, ",")) {
-        print_r($line);
-        echo "<br>";
+        if ($firstLine) { // Ignorar cabeçalho da planilha
+          $firstLine = false;
+          continue;
+        }
+
+        $rows++;
+        $customer = new Customer($line[0], $line[1], $line[2]);
+        $rowCount = $customer->store();
+
+        if ($rowCount) {
+          $rows_imported++;
+        }
       }
+      $_SESSION['imported_csv_message'] = "$rows_imported registro(s) importados de $rows registro(s) encontrados.";
+      header("Location: /clientes");
     } catch (Exception $e) {
-      echo $e->getMessage();
+      echo 'Erro ao importar planilha (.csv): ' . $e->getMessage();
     }
   }
 }
