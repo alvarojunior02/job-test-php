@@ -9,7 +9,7 @@ header {
 }
 
 #header-content {
-  max-width: 640px;
+  max-width: 768px;
   width: 100vw;
   height: 80px;
   background-color: transparent;
@@ -71,7 +71,7 @@ header {
 }
 
 main {
-  max-width: 640px;
+  max-width: 768px;
   width: 100vw;
 
   padding-top: 20px;
@@ -84,20 +84,32 @@ main {
 #form-import-customers {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
+
+  width: 100%;
+  height: min-content;
+  padding: 10px 0;
 }
 
 #form-import-customers label {
   text-align: left;
-}
-
-#form-import-customers label:hover {
   cursor: pointer;
+
+  background-color: #166534;
+  color: #FFFFFF;
+
+  width: 200px;
+  padding: 10px;
 }
 
-#form-import-customers label input[type="file"] {
-  /* display: none; */
+#form-import-customers input[type="file"] {
+  display: none;
+}
+
+#form-import-customers span {
+  margin-left: 10px;
+  color: #15803d;
 }
 
 #form-import-customers button {
@@ -111,20 +123,50 @@ main {
   transition: 0.5s;
 
   font-size: 16px;
+
 }
 
-#form-import-customers button:hover {
+#form-import-customers button:disabled {
+  display: none;
+}
+
+#form-import-customers button:enabled:hover {
   cursor: pointer;
   background-color: #166534c5;
 }
 
+#customers-buttons {}
+
 #customers-list {
   margin-top: 40px;
-
-  border: 1px solid #166534;
   width: 100%;
 }
 
-#customers-list thead {
-  border: 1px solid #166534;
+#customers-list th,
+#customers-list td {
+  padding: 5px;
+  border: 1px solid #000;
+}
+
+#customers-list th {
+  background-color: #166534;
+  color: white;
+}
+
+#customers-list td {
+  font-weight: 400;
+  font-size: 16px;
+}
+
+#customers-list td.center {
+  text-align: center;
+}
+
+#customers-list td a {
+  color: #15803d;
+  text-decoration: none;
+}
+
+#customers-list td a:hover {
+  text-decoration: underline;
 }
