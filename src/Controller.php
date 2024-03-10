@@ -7,7 +7,7 @@ class Controller
 {
   protected function render($view, $data = [])
   {
-    extract($data);
+    $_SESSION["data"] = $data;
 
     include "Views/$view.php";
   }
