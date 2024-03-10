@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
+use App\Database;
 use DateTime;
-use DateTimeInterface;
-use Lib\Database;
+use PDO;
+use PDOException;
 
 class Customer
 {
@@ -22,12 +23,56 @@ class Customer
     $this->cpf = $cpf;
     $this->name = $name;
     $this->email = $email;
-    $this->createdAt = date("Y-m-d H:i:s");
+    $this->createdAt = new DateTime();
   }
 
   // Métodos da classe
-  public function findAll()
+  public static function findAll()
   {
+    $database = new Database;
+    $connection = $database->getConnection();
+
+    $sql = "SELECT * FROM customers ORDER BY name ASC;";
+
+    $result = $connection->query($sql);
+
+    $data = $result->fetchAll(PDO::FETCH_ASSOC);
+
+    return $data;
+  }
+
+  public static function findOne(int $id)
+  {
+    $database = new Database;
+    $connection = $database->getConnection();
+
+    $sql = "SELECT * FROM customers WHERE id = " . $id . " LIMIT = 1;";
+
+    $result = $connection->query($sql);
+
+    $data = $result->fetchAll(PDO::FETCH_ASSOC);
+
+    return $data;
+  }
+
+  public function store()
+  {
+    try {
+      $database = new Database;
+      $connection = $database->getConnection();
+
+      $sql = "INSERT INTO customers (cpf, name, email) VALUES (:cpf, :name, :email);";
+
+      $statement = $connection->prepare($sql);
+      $statement->bindParam(':cpf', $this->cpf);
+      $statement->bindParam(':name', $this->name);
+      $statement->bindParam(':email', $this->email);
+
+      $statement->execute();
+      return $statement->rowCount();
+    } catch (PDOException $e) {
+      echo 'Erro ao importar planilha (.csv): ' .  $e->getMessage();
+    }
   }
 
   // Encapsulamento (Getters and Setters)
