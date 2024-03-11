@@ -20,5 +20,244 @@ body {
   width: 100vw;
   max-height: 100vh;
   height: 100vh;
-  /* overflow: hidden; */
+  overflow-x: hidden;
+}
+
+main {
+  max-width: 840px;
+  width: 100vw;
+
+  padding-top: 20px;
+}
+
+main #container-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#main-title {
+  font-size: 32px;
+}
+
+#container-page-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+#back-button {
+  border: none;
+  background-color: transparent;
+  align-self: left;
+}
+
+#back-button:hover {
+  cursor: pointer;
+}
+
+#page-title {
+  margin-left: 15px;
+}
+
+/* Formulário para importar arquivo */
+#form-import {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
+  height: min-content;
+  margin-top: 10px;
+}
+
+#form-import label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #166534;
+  color: #FFFFFF;
+
+  width: 200px;
+  height: 40px;
+}
+
+#form-import label:hover {
+  cursor: pointer;
+  background-color: #166534c5;
+}
+
+#form-import input[type="file"] {
+  display: none;
+}
+
+#form-import span {
+  margin-left: 10px;
+  color: #15803d;
+}
+
+#form-import button {
+  width: 200px;
+  padding: 10px;
+
+  border: none;
+  background-color: #166534;
+  color: #FFFFFF;
+
+  transition: 0.5s;
+
+  font-size: 16px;
+}
+
+#form-import button:disabled {
+  background-color: transparent;
+}
+
+#form-import button:enabled:hover {
+  cursor: pointer;
+  background-color: #166534c5;
+}
+
+#button-new-customer,
+#button-new-order {
+  margin-top: 10px;
+
+  width: 200px;
+  padding: 10px;
+
+  border: none;
+  background-color: #166534;
+  color: #FFFFFF;
+
+  transition: 0.5s;
+
+  font-size: 16px;
+  margin-top: 15px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#button-new-customer:hover,
+#button-new-order:hover {
+  cursor: pointer;
+  background-color: #166534c5;
+}
+
+/* Formulario de Cadastro e Edição */
+#form-customer,
+#form-order {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 100vw;
+  max-width: 840px;
+}
+
+#form-customer #inputs,
+#form-order #inputs {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+}
+
+#form-customer #inputs div,
+#form-order #inputs div {
+  display: flex;
+  flex-direction: column;
+  padding: 2px;
+
+  width: 100%;
+  max-width: 440px;
+}
+
+#form-customer #inputs div input,
+#form-order #inputs div input {
+  height: 20px;
+  padding: 5px;
+}
+
+#form-customer #buttons,
+#form-order #buttons {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#form-customer #buttons button,
+#form-order #buttons button {
+  background-color: #15803d;
+  color: #FFFFFF;
+  border: none;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  width: 200px;
+  padding: 10px 0;
+  margin: 0 10px;
+}
+
+#form-customer #buttons button:hover,
+#form-order #buttons button:hover {
+  cursor: pointer;
+  background-color: #166534c5;
+}
+
+/* Generic Table */
+#generic-table {
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+#generic-table th,
+#generic-table td {
+  padding: 5px;
+  border: 1px solid #000;
+}
+
+#generic-table th {
+  background-color: #166534;
+  color: white;
+}
+
+#generic-table td {
+  font-weight: 400;
+  font-size: 0.8rem;
+}
+
+#generic-table td.center {
+  text-align: center;
+}
+
+#generic-table td.actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#generic-table td a {
+  color: #15803d;
+  text-decoration: none;
+}
+
+#generic-table td button {
+  background-color: transparent;
+  border: none;
+}
+
+#generic-table td button:hover {
+  cursor: pointer;
 }

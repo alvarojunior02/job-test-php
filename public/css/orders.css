@@ -1,0 +1,7 @@
+#customer-link-cell {
+  text-decoration: none;
+}
+
+#customer-link-cell:hover {
+  text-decoration: underline;
+}
