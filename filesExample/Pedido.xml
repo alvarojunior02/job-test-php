@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Root>
+  <Company>
+    <CNPJ>46.228.355/0001-33</CNPJ>
+    <Name>Tecnologia Express LTDA</Name>
+    <Email>vendas@tecnologiaexpress.com.br</Email>
+  </Company>
+  <Order>
+      <Date>2024-03-10T00:00:00</Date>
+      <Amount>5.000,00</Amount>
+      <Description>Compra de gadgets para abastecer o estoque.</Description>
+  </Order>
+</Root>
