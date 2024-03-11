@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Database;
 use DateTime;
+use Exception;
 use PDO;
 use PDOException;
 
@@ -15,9 +16,7 @@ class Customer
   private string $name;
   private string $email;
   private DateTime $createdAt;
-  private $connection;
 
-  // Construtor, ao instânciar um novo objeto Customer
   public function __construct($cpf, $name, $email)
   {
     $this->cpf = $cpf;
@@ -26,7 +25,7 @@ class Customer
     $this->createdAt = new DateTime();
   }
 
-  // Métodos da classe
+  // Métodos para manipular banco de dados
   public static function findAll()
   {
     $database = new Database;
@@ -41,18 +40,18 @@ class Customer
     return $data;
   }
 
-  public static function findOne(int $id)
+  public static function findOne($id)
   {
     $database = new Database;
     $connection = $database->getConnection();
 
-    $sql = "SELECT * FROM customers WHERE id = " . $id . " LIMIT = 1;";
+    $sql = "SELECT * FROM customers WHERE id = " . $id . " LIMIT 1";
 
     $result = $connection->query($sql);
 
     $data = $result->fetchAll(PDO::FETCH_ASSOC);
 
-    return $data;
+    return $data[0];
   }
 
   public function store()
@@ -71,49 +70,40 @@ class Customer
       $statement->execute();
       return $statement->rowCount();
     } catch (PDOException $e) {
-      echo 'Erro ao importar planilha (.csv): ' .  $e->getMessage();
+      echo 'Erro ao salvar registro no banco de dados: ' .  $e->getMessage();
     }
   }
 
-  // Encapsulamento (Getters and Setters)
+  public static function update(int $id, string $name, string $email)
+  {
+    $database = new Database;
+    $connection = $database->getConnection();
+
+    $sqlSelect = "SELECT * FROM customers WHERE id = " . $id . " LIMIT 1;";
+
+    $result = $connection->query($sqlSelect);
+
+    $data = $result->fetchAll(PDO::FETCH_ASSOC);
+
+    if (isset($data)) {
+      $sqlUpdate = "UPDATE customers SET name = :name, email = :email WHERE id = :id;";
+
+      $statement = $connection->prepare($sqlUpdate);
+      $statement->bindParam(':name', $name);
+      $statement->bindParam(':email', $email);
+      $statement->bindParam(':id', $id);
+
+      $statement->execute();
+      return $statement->rowCount();
+    } else {
+      throw new Exception("Cliente não encontrado", 404);
+    }
+  }
+
+  // Getters
   public function getId(): int
   {
     return $this->id;
-  }
-
-  public function getCpf(): string
-  {
-    return $this->cpf;
-  }
-
-  public function setCpf(string $cpf): void
-  {
-    $this->cpf = $cpf;
-  }
-
-  public function setName(): string
-  {
-    return $this->name;
-  }
-
-  public function getName(string $name): void
-  {
-    $this->name = $name;
-  }
-
-  public function setEmail(string $email): void
-  {
-    $this->email = $email;
-  }
-
-  public function getEmail(): string
-  {
-    return $this->email;
-  }
-
-  public function setCreatedAt(DateTime $createdAt): void
-  {
-    $this->createdAt = $createdAt;
   }
 
   public function getCreatedAt(): string
