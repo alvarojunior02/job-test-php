@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="/css/global.css">
+  <link rel="stylesheet" href="/css/header.css">
+  <link rel="stylesheet" href="/css/customers.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <title>Loja Mágica - Clientes - Visualizar E-mail</title>
+</head>
+
+<body>
+  <header>
+    <div id="header-content">
+      <div id="header-logo">
+        <h1 style="color: #FFFFFF">Loja Mágica</h1>
+      </div>
+      <div id="header-links">
+        <a href="/" style="margin-right: 20px">Home</a>
+        <a href="/clientes">Clientes</a>
+        <a href="/pedidos" style="margin-left: 20px">Pedidos</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div>
+      <div>
+        <div id="container-page-title">
+          <button id="back-button" onclick="history.back()">
+            <img src="/assets/icons/back.png" alt="Ver" width="40" height="40" alt="Voltar" />
+          </button>
+          <h1 id="page-title">
+            Visualizar dados do E-mail
+          </h1>
+        </div>
+        <p style="margin-top: 10px">Enviado em: <?php echo date_format(new DateTime($_SESSION['data']['email']['created_at']), 'd/m/Y') ?> às <?php echo date_format(new DateTime($_SESSION['data']['email']['created_at']), 'H:i') ?></p>
+
+        <div id="form-send-email">
+          <div id="inputs">
+            <div>
+              <label for="customer_identification">Cliente: </label>
+              <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; border: 2px solid black; padding: 0 5px; width: 100%">
+                <p> <?php echo $_SESSION['data']['customer']['name'] ?>(<?php echo $_SESSION['data']['customer']['email'] ?>)</p>
+                <a href="/clientes/info?id=<?php echo $_SESSION['data']['customer']['id'] ?>">
+                  <img src="/assets/icons/eye.png" alt="Ver" width="20" height="20" />
+                </a>
+              </div>
+            </div>
+            <div style="margin-top: 10px">
+              <label for="subject">Assunto: </label>
+              <input type="text" name="subject" value="<?php echo $_SESSION['data']['email']['subject'] ?>" readonly />
+            </div>
+            <div>
+              <label for="message">Mensagem: </label>
+              <textarea rows="12" name="message" readonly><?php echo str_replace("<br />", "\n", $_SESSION['data']['email']['message']); ?></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+  </main>
+</body>
+
+</html>

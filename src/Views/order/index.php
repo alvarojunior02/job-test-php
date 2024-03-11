@@ -7,7 +7,7 @@
 
   <link rel="stylesheet" href="/css/global.css">
   <link rel="stylesheet" href="/css/header.css">
-  <link rel="stylesheet" href="/css/customers.css">
+  <link rel="stylesheet" href="/css/orders.css">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,7 +16,7 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 
-  <title>Loja Mágica - Clientes</title>
+  <title>Loja Mágica - Pedidos</title>
 </head>
 
 <body>
@@ -35,17 +35,17 @@
 
   <main>
     <div>
-      <h1>Clientes</h1>
+      <h1>Pedidos</h1>
 
-      <form id="form-import" method="POST" action="/clientes/import" enctype="multipart/form-data">
+      <form id="form-import" method="POST" action="/pedidos/import" enctype="multipart/form-data">
         <div>
           <label for="file-upload-button">
-            Importar Clientes (.csv)
-            <input type="file" id="file-upload-button" name="file_csv" accept="text/csv" required />
+            Importar Pedido (.xml)
+            <input type="file" id="file-upload-button" name="file_xml" accept="text/xml" required />
           </label>
           <span id="file-upload-name"></span>
         </div>
-        <button id="form-submit-button" type="submit" disabled>Enviar</button>
+        <button id="form-submit-button" type="submit" disabled>Salvar</button>
 
         <script>
           let input = document.getElementById("file-upload-button");
@@ -61,15 +61,13 @@
       </form>
 
       <?php
-      if (isset($_SESSION['imported_csv_message'])) {
-        echo '
-            <p style="margin: 10px 0; color: #15803d">' . $_SESSION['imported_csv_message'] . '</p>
-          ';
+      if (isset($_SESSION['imported_xml_message'])) {
+        echo $_SESSION['imported_xml_message'];
         unset($_SESSION['imported_csv_message']);
       }
       ?>
 
-      <button onclick="window.location = '/clientes/cadastrar'" id="button-new-customer">Novo Cliente</button>
+      <button onclick="window.location = '/pedidos/cadastrar'" id="button-new-order">Novo Pedido</button>
 
       <?php
       if (isset($_SESSION['crud_message'])) {
@@ -83,28 +81,24 @@
 
       <table id="generic-table" style="margin-top: 15px;">
         <tr style="background-color: #166534; color: #FFFFFF">
-          <th style="width: 15%;">CPF</th>
-          <th style="width: 30%;">Nome</th>
-          <th style="width: 40%;">E-mail</td>
-          <th style="width: 15%;">Ações</th>
+          <th style="width: 20%;">Data e Hora</th>
+          <th style="width: 35%;">Cliente</th>
+          <th style="width: 15%;">Valor</td>
+          <th style="width: 20%">Status</td>
+          <th style="width: 10%;">Ações</th>
         </tr>
         <?php
-        if (isset($_SESSION['data']['customers']) && is_array($_SESSION['data']['customers'])) {
-          foreach ($_SESSION['data']['customers'] as $customer) {
+        if (isset($_SESSION['data']['orders']) && is_array($_SESSION['data']['orders'])) {
+          foreach ($_SESSION['data']['orders'] as $order) {
             $html = '<tr>';
-            $html .= '<td class="center">' . $customer['cpf'] . '</td>';
-            $html .= '<td>' . $customer['name'] . '</td>';
-            $html .= '<td>' . $customer['email'] . '</td>';
+            $html .= '<td class="center">' . date_format(new DateTime($order['created_at']), 'd/m/Y') . ' às ' . date_format(new DateTime($order['created_at']), 'H:i') . '</td>';
+            $html .= '<td> <a id="customer-link-cell" href="/clientes/info?id=' . $order['customer_id'] . '">' . $order['name'] . ' </a> </td>';
+            $html .= '<td> R$ ' . number_format($order['amount'], 2, ',', '.') . '</td>';
+            $html .= '<td class="center">' . $order['status'] . '</td>';
             $html .= '
-              <td class="center actions" >
-                <a href="/clientes/info?id=' . $customer['id'] . '"> 
-                  <img src="/assets/icons/eye.png" alt="Ver" width="20" height="20"/>
-                </a>
-                <a href="/clientes/editar?id=' . $customer['id'] . '"> 
+              <td class="center">
+                <a href="/pedidos/editar?id=' . $order['id'] . '"> 
                   <img src="/assets/icons/pencil.png" alt="Editar" width="20" height="20"/>
-                </a>
-                <a href="/clientes/email?id=' . $customer['id'] . '"> 
-                  <img src="/assets/icons/email.png" alt="E-mail" width="20" height="20"/>
                 </a>
               </td>
             ';
